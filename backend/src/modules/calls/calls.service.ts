@@ -1,6 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { CallsRepository } from '../../repositories/calls.repository';
+import { CallsRepository } from './calls.repository';
 import { Call } from './schemas/call.schema';
+
+export interface CallAnalytics {
+  totalCalls: number;
+  totalDuration: number;
+  averageDuration: number;
+  callsByAssistant: Record<string, number>;
+  callsByClient: Record<string, number>;
+}
 
 @Injectable()
 export class CallsService {
@@ -10,7 +18,7 @@ export class CallsService {
     return this.callsRepository.findAll();
   }
 
-  async findOne(id: string): Promise<Call> {
+  async findOne(id: string): Promise<Call | null> {
     return this.callsRepository.findById(id);
   }
 
@@ -30,15 +38,15 @@ export class CallsService {
     return this.callsRepository.findRecent(limit);
   }
 
-  async getCallAnalytics(): Promise<any> {
+  async getCallAnalytics(): Promise<CallAnalytics> {
     const completedCalls = await this.callsRepository.findCompleted();
     
     const analytics = {
       totalCalls: completedCalls.length,
       totalDuration: completedCalls.reduce((sum, call) => sum + (call.duration || 0), 0),
       averageDuration: 0,
-      callsByAssistant: {},
-      callsByClient: {},
+      callsByAssistant: {} as Record<string, number>,
+      callsByClient: {} as Record<string, number>,
     };
 
     if (completedCalls.length > 0) {
@@ -47,13 +55,13 @@ export class CallsService {
 
     // Group calls by assistant
     completedCalls.forEach(call => {
-      const assistantName = call.assistantId?.name || 'Unknown';
+      const assistantName = (call.assistantId as any)?.name || 'Unknown';
       analytics.callsByAssistant[assistantName] = (analytics.callsByAssistant[assistantName] || 0) + 1;
     });
 
     // Group calls by client
     completedCalls.forEach(call => {
-      const clientName = call.clientId?.name || 'Unknown';
+      const clientName = (call.clientId as any)?.name || 'Unknown';
       analytics.callsByClient[clientName] = (analytics.callsByClient[clientName] || 0) + 1;
     });
 

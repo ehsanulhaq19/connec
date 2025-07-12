@@ -38,7 +38,7 @@ cd <repo-root>
 
 ### 2. Environment Variables
 - Copy `backend/env.example` to `backend/.env` and set values.
-- Copy `frontend/env.example` to `frontend/.env` and set values (e.g., `VITE_API_URL=http://localhost:3000/api`).
+- Copy `frontend/env.example` to `frontend/.env` and set values (e.g., `VITE_API_URL=http://localhost:3005/api`).
 
 ### 3. Install Dependencies
 #### Backend
@@ -69,10 +69,10 @@ npm run dev
 ```
 
 ### 5. Access the App
-- Frontend: [http://localhost:5173](http://localhost:5173) (or [http://localhost:3001](http://localhost:3001) if using Docker)
-- Backend API: [http://localhost:3000/api](http://localhost:3000/api)
-- Swagger Docs: [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
-- MongoDB: [mongodb://localhost:27017](mongodb://localhost:27017)
+- Frontend: [http://localhost:5173](http://localhost:5173) (or [http://localhost:5174](http://localhost:5174) if using Docker)
+- Backend API: [http://localhost:3000/api](http://localhost:3000/api) (or [http://localhost:3005/api](http://localhost:3005/api) if using Docker)
+- Swagger Docs: [http://localhost:3000/api](http://localhost:3000/api) (or [http://localhost:3005/api](http://localhost:3005/api) if using Docker)
+- MongoDB: [mongodb://localhost:27017](mongodb://localhost:27017) (or [mongodb://localhost:27018](mongodb://localhost:27018) if using Docker)
 
 ## Dockerized Setup (Recommended)
 
@@ -80,10 +80,10 @@ npm run dev
 ```sh
 docker-compose up --build
 ```
-- Frontend: [http://localhost:3001](http://localhost:3001)
-- Backend: [http://localhost:3000/api](http://localhost:3000/api)
-- Swagger: [http://localhost:3000/api/docs](http://localhost:3000/api/docs)
-- MongoDB: [localhost:27017]
+- Frontend: [http://localhost:5174](http://localhost:5174)
+- Backend: [http://localhost:3005/api](http://localhost:3005/api)
+- Swagger: [http://localhost:3005/api](http://localhost:3005/api)
+- MongoDB: [localhost:27018]
 
 ### 2. Stopping Services
 ```sh

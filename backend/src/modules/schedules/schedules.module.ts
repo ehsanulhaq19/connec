@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SchedulesController } from './schedules.controller';
 import { SchedulesService } from './schedules.service';
 import { Schedule, ScheduleSchema } from './schemas/schedule.schema';
-import { SchedulesRepository } from '../../repositories/schedules.repository';
+import { SchedulesRepository } from './schedules.repository';
 
 @Module({
   imports: [

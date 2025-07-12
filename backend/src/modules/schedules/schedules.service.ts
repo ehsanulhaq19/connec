@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { SchedulesRepository } from '../../repositories/schedules.repository';
+import { SchedulesRepository } from './schedules.repository';
 import { Schedule } from './schemas/schedule.schema';
 
 @Injectable()
 export class SchedulesService {
   constructor(private schedulesRepository: SchedulesRepository) {}
 
-  async create(createScheduleDto: any): Promise<Schedule> {
+  async create(createScheduleDto: any): Promise<Schedule | null> {
     return this.schedulesRepository.create(createScheduleDto);
   }
 
@@ -14,7 +14,7 @@ export class SchedulesService {
     return this.schedulesRepository.findAll();
   }
 
-  async findOne(id: string): Promise<Schedule> {
+  async findOne(id: string): Promise<Schedule | null> {
     return this.schedulesRepository.findById(id);
   }
 
@@ -26,15 +26,15 @@ export class SchedulesService {
     return this.schedulesRepository.findUpcoming();
   }
 
-  async update(id: string, updateScheduleDto: any): Promise<Schedule> {
+  async update(id: string, updateScheduleDto: any): Promise<Schedule | null> {
     return this.schedulesRepository.update(id, updateScheduleDto);
   }
 
-  async remove(id: string): Promise<Schedule> {
+  async remove(id: string): Promise<Schedule | null> {
     return this.schedulesRepository.remove(id);
   }
 
-  async cancelSchedule(id: string): Promise<Schedule> {
+  async cancelSchedule(id: string): Promise<Schedule | null> {
     return this.schedulesRepository.update(id, { status: 'cancelled' });
   }
 } 

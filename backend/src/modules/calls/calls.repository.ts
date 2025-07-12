@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Call, CallDocument } from '../modules/calls/schemas/call.schema';
+import { Call, CallDocument } from './schemas/call.schema';
 
 @Injectable()
 export class CallsRepository {
@@ -17,7 +17,7 @@ export class CallsRepository {
       .exec();
   }
 
-  async findById(id: string): Promise<Call> {
+  async findById(id: string): Promise<Call | null> {
     return this.callModel
       .findById(id)
       .populate('assistantId clientId scheduleId')

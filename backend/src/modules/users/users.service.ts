@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { UsersRepository } from '../../repositories/users.repository';
+import { UsersRepository } from './users.repository';
 import { User } from './schemas/user.schema';
 
 @Injectable()
 export class UsersService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async create(createUserDto: any): Promise<User> {
+  async create(createUserDto: any): Promise<User | null> {
     return this.usersRepository.create(createUserDto);
   }
 
@@ -14,19 +14,19 @@ export class UsersService {
     return this.usersRepository.findAll();
   }
 
-  async findOne(id: string): Promise<User> {
+  async findOne(id: string): Promise<User | null> {
     return this.usersRepository.findById(id);
   }
 
-  async findByEmail(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User | null> {
     return this.usersRepository.findByEmail(email);
   }
 
-  async update(id: string, updateUserDto: any): Promise<User> {
+  async update(id: string, updateUserDto: any): Promise<User | null> {
     return this.usersRepository.update(id, updateUserDto);
   }
 
-  async remove(id: string): Promise<User> {
+  async remove(id: string): Promise<User | null> {
     return this.usersRepository.remove(id);
   }
 } 

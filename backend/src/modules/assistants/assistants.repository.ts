@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Assistant, AssistantDocument } from '../modules/assistants/schemas/assistant.schema';
+import { Assistant, AssistantDocument } from './schemas/assistant.schema';
 
 @Injectable()
 export class AssistantsRepository {
@@ -18,7 +18,7 @@ export class AssistantsRepository {
     return this.assistantModel.find().exec();
   }
 
-  async findById(id: string): Promise<Assistant> {
+  async findById(id: string): Promise<Assistant | null> {
     return this.assistantModel.findById(id).exec();
   }
 
@@ -26,13 +26,13 @@ export class AssistantsRepository {
     return this.assistantModel.find({ isActive: true }).exec();
   }
 
-  async update(id: string, updateAssistantDto: any): Promise<Assistant> {
+  async update(id: string, updateAssistantDto: any): Promise<Assistant | null> {
     return this.assistantModel
       .findByIdAndUpdate(id, updateAssistantDto, { new: true })
       .exec();
   }
 
-  async remove(id: string): Promise<Assistant> {
+  async remove(id: string): Promise<Assistant | null> {
     return this.assistantModel.findByIdAndDelete(id).exec();
   }
 } 

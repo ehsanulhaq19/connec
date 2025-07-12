@@ -9,6 +9,7 @@ import { AssistantsModule } from './modules/assistants/assistants.module';
 import { ClientsModule } from './modules/clients/clients.module';
 import { SchedulesModule } from './modules/schedules/schedules.module';
 import { CallsModule } from './modules/calls/calls.module';
+import { MigrationModule } from './migrations/migration.module';
 import { databaseConfig } from './config/database.config';
 
 @Module({
@@ -16,13 +17,14 @@ import { databaseConfig } from './config/database.config';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(databaseConfig.uri, databaseConfig),
+    MongooseModule.forRoot(databaseConfig.uri, databaseConfig.options),
     AuthModule,
     UsersModule,
     AssistantsModule,
     ClientsModule,
     SchedulesModule,
     CallsModule,
+    MigrationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

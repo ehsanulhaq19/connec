@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AssistantsController } from './assistants.controller';
 import { AssistantsService } from './assistants.service';
 import { Assistant, AssistantSchema } from './schemas/assistant.schema';
-import { AssistantsRepository } from '../../repositories/assistants.repository';
+import { AssistantsRepository } from './assistants.repository';
 
 @Module({
   imports: [

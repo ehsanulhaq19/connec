@@ -1,0 +1,38 @@
+// CompletedCalls page styles
+.completed-calls-page {
+  .stats-grid {
+    animation: fadeInUp 0.4s ease-out;
+  }
+  
+  .calls-list {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  .call-card {
+    transition: all 0.2s ease-in-out;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .status-badge {
+    transition: all 0.2s ease-in-out;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

@@ -12,6 +12,14 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     volumes:
       - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - app-network
 
   backend:
     build:
@@ -21,7 +29,7 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      - MONGO_URI=mongodb://root:example@mongo:27017/ai_virtual_assistant?authSource=admin
+      - MONGODB_URI=mongodb://root:example@mongo:27017/connec?authSource=admin
       - NODE_ENV=development
     ports:
       - '3005:3000'
@@ -29,7 +37,8 @@ services:
       - ./backend:/app
       - /app/node_modules
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     networks:
       - app-network
 
@@ -42,6 +51,7 @@ services:
       - ./frontend/.env
     environment:
       - NODE_ENV=development
+      - VITE_API_URL=http://localhost:3005/api
     ports:
       - '5174:5173'
     volumes:

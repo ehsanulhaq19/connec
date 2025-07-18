@@ -174,11 +174,11 @@ export class AuthController {
   }
 
   @Post('verify-token')
-  @ApiBearerAuth()
+  @ApiBearerAuth('JWT-auth')
   @ApiOperation({ 
     summary: 'Verify JWT token',
     description: 'Verifies if the provided JWT token is valid and returns the decoded user information. Useful for token validation.',
-    security: [{ JWT: [] }]
+    security: [{ 'JWT-auth': [] }]
   })
   @ApiResponse({ 
     status: HttpStatus.OK, 

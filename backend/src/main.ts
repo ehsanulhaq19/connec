@@ -154,7 +154,7 @@ async function bootstrap() {
       },
       // Enhanced JWT authentication UI
       authAction: {
-        JWT: {
+        'JWT-auth': {
           name: 'JWT',
           schema: {
             type: 'apiKey',

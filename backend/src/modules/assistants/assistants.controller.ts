@@ -23,7 +23,7 @@ import { CreateAssistantDto } from './dto/create-assistant.dto';
 import { UpdateAssistantDto } from './dto/update-assistant.dto';
 
 @ApiTags('Virtual Assistants')
-@ApiBearerAuth()
+@ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard)
 @Controller('assistants')
 export class AssistantsController {
